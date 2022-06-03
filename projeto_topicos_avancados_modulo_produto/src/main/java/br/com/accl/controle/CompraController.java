@@ -34,7 +34,7 @@ public class CompraController {
 	private EstoqueRepositorio estoquerepositorio;
 	
 	
-	/*----------------------------- [ API - salvar compra - comprarProduto (com INTEGRAÇÃO) ] ------------------------------------*/
+	/*----------------------------- [ API - salvar compra - comprarProduto (COM INTEGRAÇÃO) ] ------------------------------------*/
 
 	 
 	@ApiOperation(value = "Salvar uma compra via RequestParam COM INTEGRAÇÃO" )
@@ -53,43 +53,45 @@ public class CompraController {
 			   throws Exception {
 		 
 		 System.out.println("Processando metodo salvarCompraIntegrada ...");
-
-		 //System.out.println(estoquerepositorio.existeEstoque(quantidade));
 		 
+	
+		 ResponseEntity<Boolean> estoqueSuficiente = estoquerepositorio.verificarEstoque(idProduto, quantidade);
+		 Boolean estoqueSuficienteOk = estoqueSuficiente.getBody();
+		 
+		 
+		 
+		 	 
 		 Compra compra = new Compra();
-		 //Produto prod_ = new Produto();
+		 Produto prod = new Produto();
 		 
-		 //compra.setProduto(prod_);
-		 
-		 //compra.produto.id = idProduto;
-		 //compra.quantidade = quantidade;	
-		 
-		 //Boolean existeEstoque 
-		 Produto prod = estoquerepositorio.verificarEstoque(idProduto, quantidade);
-		 //Boolean estoqueSuficiente = estoquerepositorio.existeEstoque(quantidade);
-		 
-		 //compra.setProduto(prod);
+		 compra.setProduto(prod);
 		 
 		 compra.produto.id = idProduto;
 		 compra.quantidade = quantidade;
-		 
-		 System.out.println("Quantidade solicitada "+quantidade+" status do estoque ");
-		 
-		 
-		 compra.setProduto(prod);
+		  
+		 Produto prod_ = produtoservice.buscarPorId(idProduto);
+		 compra.setProduto(prod_);
 		
-		if(prod != (null) ) {
+		if(estoqueSuficienteOk != false) {
 			compraservice.salvarCompra(compra);
 			
 			System.out.println(compra.id);
-
+			System.out.println("Quantidade solicitada "+quantidade+" status do estoque ");
 		 
+			estoquerepositorio.atualizarEstoque(idProduto, quantidade);
+		
+			
 			return ResponseEntity.ok(compra.id);
  
 		}else {
-			return ResponseEntity.badRequest().build();
+			
+			System.out.println("Quantidade solicitada "+quantidade+" Insuficiente no estoque ");
+			return ResponseEntity.badRequest().build();			
 		}
 	  }
+	
+	
+	
 	
 	/*----------------------------- [ API - salvar compra - comprarProduto (sem integração) ] ------------------------------------*/
 
