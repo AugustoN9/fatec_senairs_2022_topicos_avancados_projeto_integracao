@@ -2,21 +2,18 @@ package br.com.accl.repositorio;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
-
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import br.com.accl.entidade.Produto;
 
 
 //url: endereco de onde esta o servico.
 
 @FeignClient(value = "modulo-estoque", 
 url = "http://localhost:8087/estoque/")
+
+//ip do docker
 
 //,fallback = EstoqueRepositorioFalha.class)
 

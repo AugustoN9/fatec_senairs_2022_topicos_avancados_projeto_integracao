@@ -11,7 +11,7 @@ import br.com.accl.entidade.Produto;
 
 
 @Service
-public class ProdutoService {
+public class ProdutoServico {
 	Map<Integer, Produto> mapaProduto = new HashMap<Integer, Produto>();
 	Integer contador = 1;
 

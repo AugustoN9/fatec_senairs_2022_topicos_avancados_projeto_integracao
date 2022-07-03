@@ -2,6 +2,14 @@ package br.com.accl.controle;
 
 import java.util.List;
 
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.JobParametersInvalidException;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.accl.entidade.Compra;
 import br.com.accl.entidade.Produto;
 import br.com.accl.repositorio.EstoqueRepositorio;
-import br.com.accl.servico.CompraService;
-import br.com.accl.servico.ProdutoService;
+import br.com.accl.servico.CompraServico;
+import br.com.accl.servico.ProdutoServico;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -25,13 +33,20 @@ import io.swagger.annotations.ApiResponses;
 public class CompraController {
 
 	@Autowired
-	private CompraService compraservice;
+	private CompraServico compraservice;
 	
 	@Autowired
-	private ProdutoService produtoservice;
+	private ProdutoServico produtoservice;
 	
 	@Autowired
 	private EstoqueRepositorio estoquerepositorio;
+	
+	@Autowired
+    private JobLauncher jobLauncher;
+	
+	@Autowired
+    private Job processJob;
+	
 	
 	
 	/*----------------------------- [ API - salvar compra - comprarProduto (COM INTEGRAÇÃO) ] ------------------------------------*/
@@ -171,5 +186,19 @@ public class CompraController {
 		 		 
 		 return ResponseEntity.ok("Lote de 10");
 	  }
+	 
+	 
+/*----------------------------- [ API - executaProcessamentoEmLote - ComprasAcima10 ] ------------------------------------*/
+
+	 
+	 @RequestMapping(value = "/inicia-processamento-loteacimade10/", method = RequestMethod.GET)	 
+	  public void iniciarProcessamentoLote() throws JobExecutionAlreadyRunningException, 
+	  JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException{
+		 JobParameters jobParameters = new JobParametersBuilder()
+					.addLong("time", System.currentTimeMillis())
+	                .toJobParameters();
+	        jobLauncher.run(processJob, jobParameters);
+		 
+	 }
 
 }

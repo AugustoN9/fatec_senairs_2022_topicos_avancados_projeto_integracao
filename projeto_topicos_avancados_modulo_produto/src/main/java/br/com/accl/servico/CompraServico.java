@@ -12,7 +12,7 @@ import br.com.accl.entidade.Compra;
 
 
 @Service
-public class CompraService {
+public class CompraServico {
 	Map<Integer, Compra> mapaCompra = new HashMap<Integer, Compra>();
 	Integer contador = 1;
 

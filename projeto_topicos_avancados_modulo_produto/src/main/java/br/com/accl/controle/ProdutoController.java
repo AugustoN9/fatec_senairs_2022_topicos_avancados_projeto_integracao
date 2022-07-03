@@ -3,6 +3,7 @@ package br.com.accl.controle;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.accl.entidade.Produto;
-import br.com.accl.servico.ProdutoService;
+import br.com.accl.servico.ProdutoServico;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -24,7 +25,7 @@ import io.swagger.annotations.ApiResponses;
 public class ProdutoController {
 
 	@Autowired
-	private ProdutoService produtoservice;
+	private ProdutoServico produtoservice;
 	
 	
 	/*----------------------------- [ API - cadastro do produto ] ------------------------------------*/
