@@ -14,6 +14,7 @@ import br.com.accl.batch.item.ProdutoWriter;
 import br.com.accl.entidade.ProcessaProduto;
 import br.com.accl.entidade.Produto;
 
+
 @Configuration
 public class BatchConfiguration {
 
@@ -60,6 +61,5 @@ public class BatchConfiguration {
 				.writer(produtoWriter)
 				.build();
 	}
-
 	
 }

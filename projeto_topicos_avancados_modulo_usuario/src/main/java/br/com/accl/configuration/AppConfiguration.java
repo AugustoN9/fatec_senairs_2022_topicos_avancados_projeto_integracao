@@ -1,9 +1,11 @@
-package br.com.mbs.configuration;
+package br.com.accl.configuration;
 
 import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.Configuration;
 
-import br.com.mbs.servico.UsuarioServico;
+import br.com.accl.service.UsuarioServico;
+
 
 @Configuration
 public class AppConfiguration {

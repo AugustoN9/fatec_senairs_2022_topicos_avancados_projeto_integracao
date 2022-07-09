@@ -2,7 +2,6 @@ package br.com.accl.batch.item;
 
 import java.util.Iterator;
 
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.batch.item.ItemReader;
@@ -12,6 +11,7 @@ import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.accl.entity.Usuario;
+import br.com.accl.service.UsuarioServico;
 
 
 

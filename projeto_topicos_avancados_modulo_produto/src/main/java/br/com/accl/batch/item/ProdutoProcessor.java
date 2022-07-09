@@ -1,6 +1,7 @@
 package br.com.accl.batch.item;
 
 import org.springframework.batch.item.ItemProcessor;
+
 import br.com.accl.entidade.ProcessaProduto;
 import br.com.accl.entidade.Produto;
 

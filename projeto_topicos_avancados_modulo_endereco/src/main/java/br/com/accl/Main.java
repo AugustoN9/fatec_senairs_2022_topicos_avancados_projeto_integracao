@@ -1,4 +1,4 @@
-package br.com.mbs;
+package br.com.accl;
 
 
 import org.springframework.boot.SpringApplication;

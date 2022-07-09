@@ -1,12 +1,14 @@
-package br.com.mbs.delegates;
+package br.com.accl.delegates;
 
 import java.util.Map;
+
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
 
-import br.com.mbs.entidades.Usuario;
+import br.com.accl.entity.Usuario;
+
 
 @Component("CadastroUsuarioMemoriaDelegate")
 public class CadastroUsuarioMemoriaDelegate

@@ -1,18 +1,22 @@
-package br.com.mbs.configuration;
+package br.com.accl.configuration;
 
 import org.springframework.batch.core.Job;
+
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.mbs.batch.item.UsuarioProcessor;
-import br.com.mbs.batch.item.UsuarioReader;
-import br.com.mbs.batch.item.UsuarioWriter;
-import br.com.mbs.entidades.Usuario;
+import br.com.accl.batch.item.UsuarioProcessor;
+import br.com.accl.batch.item.UsuarioReader;
+import br.com.accl.batch.item.UsuarioWriter;
+import br.com.accl.entity.Usuario;
+
+
 
 @Configuration
 public class BatchConfiguration {
@@ -29,7 +33,7 @@ public class BatchConfiguration {
 	}
 	
 	@Bean
-	public UsuarioProcessor usuarioProcessor() {
+	public ItemProcessor<? super Usuario, ? extends Usuario> usuarioProcessor() {
 		return new UsuarioProcessor(); 
 	}
 	
